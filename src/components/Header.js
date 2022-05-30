@@ -18,7 +18,7 @@ function Header({ text, bgColor, textColor }) {
   );
 }
 
-//This code below is the default props method, in case I don't pass any props into the component.
+//This code below is the default props values, in case I don't pass any props into the component.
 Header.defaultProps = {
   text: "Feedback UI",
   bgColor: "rgba(0,0,0,0.4)",

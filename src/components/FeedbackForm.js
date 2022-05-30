@@ -1,10 +1,15 @@
-import React from "react";
+import React, {useContext} from "react";
 import { useState } from "react";
 import Card from "./shared/Card";
 import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
+import FeedbackContext from "../context/FeedbackContext";
 
-function FeedbackForm({ handleAdd }) {
+
+function FeedbackForm() {
+
+  const {addFeedback} = useContext(FeedbackContext)
+
   // This hook handles the state of the user review textbox.
   const [input, setInput] = useState("");
 
@@ -44,7 +49,7 @@ function FeedbackForm({ handleAdd }) {
         rating: rating,
       };
       //console.log("the new feedback object", newFeedback);
-      handleAdd(newFeedback);
+      addFeedback(newFeedback);
       setInput("");
     }
   };

@@ -7,6 +7,7 @@ function RatingSelect({ select }) {
   // The event handler when the user selects the number it will set to state.
   const handleChange = (e) => {
     setSelected(+e.currentTarget.value);
+    //Notice that the select prop also catches the currentTarget value. The (+) sign means the variable will be a number.
     select(+e.currentTarget.value);
   };
 
