@@ -28,11 +28,17 @@ export const FeedbackProvider = ({ children }) => {
     },
   ]);
 
-
   const [feedbackEdit, setFeedbackEdit] = useState({
     item: {},
-    edit: false
-  })
+    edit: false,
+  });
+
+  // Update the feedback
+  const updateFeedback = (id, updatedItem) => {
+    setFeedback(
+      feedback.map((item) => (item.id === id ? { ...item, ...updatedItem } : item))
+    );
+  };
 
   //This code deletes the feedback after a confirmation window.
   const deleteFeedback = (id) => {
@@ -52,9 +58,9 @@ export const FeedbackProvider = ({ children }) => {
   const editFeedback = (item) => {
     setFeedbackEdit({
       item,
-      edit: true
-    })
-  }
+      edit: true,
+    });
+  };
 
   return (
     // This is how I create the provider component for the FeedbackContext component.
@@ -64,7 +70,9 @@ export const FeedbackProvider = ({ children }) => {
         feedback: feedback,
         deleteFeedback: deleteFeedback,
         addFeedback: addFeedback,
-        editFeedback: editFeedback
+        editFeedback: editFeedback,
+        feedbackEdit: feedbackEdit,
+        updateFeedback: updateFeedback,
       }}
     >
       {children}

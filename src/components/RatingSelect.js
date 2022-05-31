@@ -1,8 +1,14 @@
-import React from "react";
-import { useState } from "react";
+import React, { useEffect } from "react";
+import { useState, useContext } from "react";
+import FeedbackContext from "../context/FeedbackContext";
 
 function RatingSelect({ select }) {
   const [selected, setSelected] = useState(undefined);
+  const { feedbackEdit } = useContext(FeedbackContext);
+
+  useEffect(()=> {
+    setSelected(feedbackEdit.item.rating)
+  }, [feedbackEdit])
 
   // The event handler when the user selects the number it will set to state.
   const handleChange = (e) => {

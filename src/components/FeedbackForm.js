@@ -1,14 +1,21 @@
-import React, {useContext} from "react";
-import { useState } from "react";
+import React, { useContext } from "react";
+import { useState, useEffect } from "react";
 import Card from "./shared/Card";
 import Button from "./shared/Button";
 import RatingSelect from "./RatingSelect";
 import FeedbackContext from "../context/FeedbackContext";
 
-
 function FeedbackForm() {
+  //Import the feedbackEdit function as Global State. The feedbackEdit function was a useStateHook.
+  const { addFeedback, feedbackEdit, updateFeedback } = useContext(FeedbackContext);
 
-  const {addFeedback} = useContext(FeedbackContext)
+  useEffect(() => {
+    if(feedbackEdit.edit === true) {
+      setBtnDisabled(false)
+      setInput(feedbackEdit.item.text)
+      setRating(feedbackEdit.item.rating)
+    }
+  }, [feedbackEdit])
 
   // This hook handles the state of the user review textbox.
   const [input, setInput] = useState("");
@@ -48,8 +55,13 @@ function FeedbackForm() {
         text: input,
         rating: rating,
       };
+      //If statement to add/edit feedback
+      if(feedbackEdit.edit === true) {
+        updateFeedback(feedbackEdit.item.id, newFeedback)
+      } else {
+        addFeedback(newFeedback)
+      }
       //console.log("the new feedback object", newFeedback);
-      addFeedback(newFeedback);
       setInput("");
     }
   };
