@@ -36,7 +36,7 @@ export const FeedbackProvider = ({ children }) => {
     setIsLoading(false);
   };
 
-  // Update the feedback
+  // Update the feedback with API call
   const updateFeedback = async (id, updatedItem) => {
     const response = await fetch(`/feedback/${id}`, {
       method: "PUT",
